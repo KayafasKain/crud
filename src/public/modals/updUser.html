@@ -1,0 +1,22 @@
+<div style="z-index: 1050; display: block;" class="modal ng-scope top am-fade-and-slide-top" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" ng-show="title">
+				<button type="button" class="close" ng-click="$hide()">×</button>
+				<h4 class="modal-title ng-binding" ng-bind-html="title">Title</h4>
+			</div>
+			<div class="modal-body" ng-show="content">
+				<ul class="list-group">
+					<li class = "list-group-item" >name<input class="form-control" ng-model="exchange.updPersonal.name" type="text" name="name"></li>
+					<li class = "list-group-item">fname<input class="form-control" ng-model="exchange.updPersonal.fname" type="text" name="fname"></li>
+					<li class = "list-group-item">phone<input class="form-control" ng-model="exchange.updPersonal.phone" type="text" name="phone"></li>
+					<li class = "list-group-item">salary<input class="form-control" ng-model="exchange.updPersonal.salary" type="text" name="salary"></li>
+					<li class = "list-group-item">
+						<button class="btn btn-warning" ng-click="ubdatePersonal()">Set</button>
+					</li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+</div>

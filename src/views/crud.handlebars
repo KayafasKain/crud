@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+{{#if user}}
+<div class="connetction">
+	<script src = "/socket.io/socket.io.js"></script>
+	<script type = "text/javascript" src="/js/controllers/controller.js"></script> 
+</div>
+<div ng-controller = "CRUD as DAT">
+	<h2>CRUD system</h2>
+
+
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Fname</th>
+      <th>Phone</th>
+      <th>Salary</th>
+    </tr>
+    <tr ng-repeat = "staff in DAT.Personal">
+      <td> [{ staff.name }] </td>
+      <td> [{ staff.fname }] </td>
+      <td> [{ staff.phone }] </td>
+      <td> [{ staff.salary }] </td>
+      <td>
+        <button class="btn btn-warning" ng-click = "showUpdModal(staff)">update</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" ng-click = "showDltModal(staff)">delete</button>
+      </td>      
+    </tr>
+  </table>
+    <button class="btn btn-page btn-warning" ng-click = "DAT.pervPage()">-</button>
+    <b>[{ DAT.CurrentPage }]</b>
+    <button class="btn btn-page btn-warning" ng-click = "DAT.nextPage()">+</button>
+</div>
+
+<div ng-controller = "ModalDemoCtrl">
+    <button type = "button" class="btn btn-add btn-lg btn-success" ng-click="showModal()">
+      AddUser
+    </button>
+</div>
+{{else}}
+<div class = "col-lg-2"></div>
+<div class = "col-lg-6 cont">
+  <h2>Please, <a href="/users/login">Login</a></h2>
+</div>
+{{/if}}

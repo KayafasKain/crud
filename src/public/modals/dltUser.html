@@ -1,0 +1,15 @@
+<div style="z-index: 1050; display: block;" class="modal ng-scope top am-fade-and-slide-top" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" ng-show="title">
+				<button type="button" class="close" ng-click="$hide()">×</button>
+				<h4 class="modal-title ng-binding" ng-bind-html="title">Title</h4>
+			</div>
+			<div class="modal-body" ng-show="content">
+				<h4>Delete?</h4>
+				<button class="btn btn-success" ng-click="hideDltModal()">Cancel</button>
+				<button class="btn btn-danger" ng-click="deletePersonal()">Delete</button>				
+			</div>
+		</div>
+	</div>
+</div>
