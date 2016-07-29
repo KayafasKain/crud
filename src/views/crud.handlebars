@@ -8,34 +8,37 @@
 <div ng-controller = "CRUD as DAT">
 	<h2>CRUD system</h2>
 
-
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Fname</th>
-      <th>Phone</th>
-      <th>Salary</th>
-    </tr>
-    <tr ng-repeat = "staff in DAT.Personal">
-      <td> [{ staff.name }] </td>
-      <td> [{ staff.fname }] </td>
-      <td> [{ staff.phone }] </td>
-      <td> [{ staff.salary }] </td>
-      <td>
-        <button class="btn btn-warning" ng-click = "showUpdModal(staff)">update</button>
-      </td>
-      <td>
-        <button class="btn btn-danger" ng-click = "showDltModal(staff)">delete</button>
-      </td>      
-    </tr>
-  </table>
+  <div class = "searchCont">
+    <input type="text" class = "searchFld form-control" ng-model = "search.s" name="search">
+    <button class = "btn btnSearch btn-success" ng-click = "DAT.search(search.s)">search</button>
+  </div>
+  <div class="tablCont">
+    <table class="table-striped table">
+      <tr>
+        <th>Name</th>
+        <th>Fname</th>
+        <th>Phone</th>
+        <th>Salary</th>
+      </tr>
+      <tr ng-repeat = "staff in DAT.Personal">
+        <td> [{ staff.name }] </td>
+        <td> [{ staff.fname }] </td>
+        <td> [{ staff.phone }] </td>
+        <td> [{ staff.salary }] </td>
+        <td>
+          <button class="btn btn-warning" ng-click = "showUpdModal(staff)">update</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" ng-click = "showDltModal(staff)">delete</button>
+        </td>      
+      </tr>
+    </table>
+  </div>
     <button class="btn btn-page btn-warning" ng-click = "DAT.pervPage()">-</button>
     <b>[{ DAT.CurrentPage }]</b>
     <button class="btn btn-page btn-warning" ng-click = "DAT.nextPage()">+</button>
-</div>
 
-<div ng-controller = "ModalDemoCtrl">
-    <button type = "button" class="btn btn-add btn-lg btn-success" ng-click="showModal()">
+    <br><button type = "button" class="btn btn-add btn-lg btn-success" ng-click="showModal()">
       AddUser
     </button>
 </div>

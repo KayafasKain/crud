@@ -56,7 +56,22 @@ body{
   font-family: 'Merriweather', serif;
 }
 
-table{
+.btnSearch{
+  /*padding: 0px!important;*/
+  margin-top: -3px!important; 
+}
+
+.searchFld{
+  width: 250px!important;
+  margin: 0px!important; 
+  display: inline!important;
+}
+
+.searchCont{
+  padding: 50px 50px 50px 0px;
+}
+
+.tablCont{
   height: 400px;
 }
 

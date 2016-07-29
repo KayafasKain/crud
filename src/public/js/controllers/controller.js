@@ -50,8 +50,17 @@ app.controller('CRUD', function($scope, $http, $modal, exchange) {
 				console.log(DATA.Personal);
 				$scope.$apply();
 		});
+		//gathering Personal list from the database
+		$scope.socket.on('searchResult', function( data ){			
+				DATA.Personal = data;
+				console.log(data);
+				$scope.$apply();
+				console.log("recivingSearchData");
+				console.log(DATA.Personal);
+				$scope.$apply();
+		});
 	}
-	
+	//searchResult
 //Personal base work==========================================
 	//Pager
 	DATA.nextPage = function(){
@@ -70,6 +79,14 @@ app.controller('CRUD', function($scope, $http, $modal, exchange) {
 		}
 	}
 
+	//Find by the name
+	DATA.search = function( searchObj ){
+		console.log(searchObj);
+			$scope.socket.emit('search',{
+				search: searchObj
+			});
+		
+	}
 
 // MODAL Controllers! =====================================
 
@@ -158,38 +175,15 @@ app.controller('CRUD', function($scope, $http, $modal, exchange) {
     	myDltModal.$promise.then(myDltModal.hide);
     };
 
-})
-
-
-
-
-//ADD MODAL
-app.controller('ModalDemoCtrl', function($scope, $modal) {
-  $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
-
-	//connecting
-	try{
-   		$scope.socket = io.connect('http://localhost:3000');
-   		console.log("connection set up!");
-   	} catch(e) {
-		alert("connection lost");
-	}
-    $scope.socket.on('news', function (data) {
-    	console.log(data);
-    	$scope.socket.emit('my other event', { my: 'data' });
-    });
-
-
-
     //ADD modal controller
-    function MyModalController( $scope ) {
+    function addController( $scope, exchange) {
 	    $scope.title = 'Some Title';
 	    $scope.content = 'Hello Modal<br />This is a multiline message from a controller!';
-
+		$scope.exchange = exchange;
 
 		$scope.AddPersonal = function ( Personal ){
 
-				$scope.socket.emit('pushPersonal',{
+				$scope.exchange.socket.emit('pushPersonal',{
 					name: Personal.name,
 					fname: Personal.fname,
 					phone: Personal.phone,
@@ -200,8 +194,8 @@ app.controller('ModalDemoCtrl', function($scope, $modal) {
 		}	    
 
     }
-    MyModalController.$inject = ['$scope'];
-    var myModal = $modal({controller: MyModalController, templateUrl: 'modals/addUser.html', show: false});
+    addController.$inject = ['$scope','exchange'];
+    var myModal = $modal({controller: addController, templateUrl: 'modals/addUser.html', show: false});
     $scope.showModal = function() {
    		myModal.$promise.then(myModal.show);
     };
@@ -209,4 +203,9 @@ app.controller('ModalDemoCtrl', function($scope, $modal) {
     	myModal.$promise.then(myModal.hide);
     };
 
-});
+
+})
+
+
+
+

@@ -35,3 +35,12 @@ module.exports.dltPersonal = function( socket, PersonalDB, Personal, callback ){
 	var status = "complete: remove";
 	callback(status);
 }
+//searchPersonal
+module.exports.srchPersonal = function( socket, PersonalDB, Personal, callback ){
+	PersonalDB.srchPersonal(Personal, function(docs){
+		console.log("srch doc  " + docs);
+		socket.emit('searchResult', docs);
+	});
+	var status = "complete: search";
+	callback(status);
+}

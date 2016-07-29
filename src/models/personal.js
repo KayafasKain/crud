@@ -20,7 +20,10 @@ var PersonalSchema = mongoose.Schema({
 	},
 	recID: {
 		type: String
-	}
+	},
+	search: {
+		type: String
+	}	
 });
 
 PersonalSchema.plugin(mongoosePaginate);
@@ -82,6 +85,38 @@ module.exports.dltPersonal = function( dltObject ){
 			console.log(err);
 		} 
 	});
+}
+
+module.exports.srchPersonal = function( srchObject, callback ){
+	console.log("srch vrd  " + srchObject.search);
+	Personal.find({name: srchObject.search}, function(err, docs){
+		if(err) throw err;
+		callback(docs);
+
+		if(docs.length == 0){
+			Personal.find({fname: srchObject.search}, function(err, docs){
+				if(err) throw err;
+				callback(docs);
+
+				if(docs.length == 0){
+					Personal.find({phone: srchObject.search}, function(err, docs){
+						if(err) throw err;
+						callback(docs);
+
+						if(docs.length == 0){
+							Personal.find({salary: srchObject.search}, function(err, docs){
+								if(err) throw err;
+								callback(docs);
+
+							});
+						}
+					});
+				}
+			});
+		}
+
+	});
+
 }
 
 

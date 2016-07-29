@@ -182,7 +182,6 @@ io.on('connection', function (socket) {
 	socket.on('PersonalToDelete', function (data) {
 
 		console.log("recieved data: "+data);
-		//console.log(data.updObject.oldObj);
 
 
 		var dltData = new PersonalDB({
@@ -199,9 +198,31 @@ io.on('connection', function (socket) {
 
 	});
 
-	// socket.emit('news', { hello: 'world' });
-	// socket.on('my other event', function (data) {
-	//   console.log(data);
-	// });
+	//listen on search personal pushPersonalToUpdate
+	socket.on('search', function (data) {
+
+		console.log(data);
+
+
+		var srchData = new PersonalDB({
+			search: data.search
+		});
+
+		console.log(" recieved srch vrd: "+srchData);
+
+		if(data.search == "" || data.search == undefined || data.search == null){
+			CrudConn.sendPersonal(socket, PersonalDB, GetPage, function(status) {
+				console.log(status);
+			});			
+		}else{
+			
+			CrudConn.srchPersonal(socket, PersonalDB, srchData,function(status){
+				console.log(status);
+			});
+
+		}
+
+	});
+
 });
 
